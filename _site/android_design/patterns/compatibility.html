@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 兼容性</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>兼容性&nbsp;<a class="originalLink" href="http://developer.android.com/design/patterns/compatibility.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="help.html">上一页</a><a class="buttonNext" href="accessibility.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<a class="noticeDev" href="http://developer.android.com/training/basics/supporting-devices/index.html" target="_blank">
+					<div>
+						<h3>开发者文档</h3>
+						<p>Supporting Different Devices</p>
+					</div>
+				</a>
+				<p>Android 3.0 的主要变化包括:</p>
+				<ul class="circleList">
+				<li>不再使用硬件按键进行导航 (返回、菜单、搜索和主屏幕)，而是采用虚拟按键 (返回，主屏幕和最近的应用)。</li>
+				<li>在操作栏固定菜单。</li>
+				</ul>
+				<p>Android 4.0 则把这些变化带到了手机平台。</p>
+				<div class="contentHeaderWraper">
+					<h2>Android 4.0 如何兼容旧的设备和应用</h2>
+				</div>
+				<div>
+					<div class="column col6">
+						<h4>虚拟按键的手机</h4>
+						<p>为 Android 3.0 及以后版本设计的应用都使用了操作栏。操作栏放不下的操作则被放在屏幕右上角的“更多操作”菜单中。</p>
+						<p>用户通过触摸操作栏的图标执行任务。</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="compatibility_virtual_nav.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col6">
+						<h4>物理按键的手机</h4>
+						<p>拥有物理按键的 Android 手机不在屏幕底部显示虚拟导航栏。因此“更多操作”菜单通过硬件菜单键调出。菜单的样式和上面的一样，但是显示在屏幕底部。</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="compatibility_physical_buttons.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col6">
+						<h4>虚拟按键的手机上运行以前的应用</h4>
+						<p>当你运行为 Android 2.3 或更早的系统设计的应用时，会有一个“更多操作”的图标出现在虚拟导航栏右侧。通过触摸该图标，可以调出菜单，行为和硬件菜单按键一样。</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="compatibility_legacy_apps.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div><!-- mainContent -->
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="help.html">上一页</a><a class="buttonNext" href="accessibility.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

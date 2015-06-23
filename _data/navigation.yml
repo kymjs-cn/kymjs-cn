@@ -1,0 +1,42 @@
+- title: 代码与技术
+  url: "/code"
+  side: left
+  dropdown:
+  - title: "Android"
+    url: "/code/android"
+  - title: "IOS"
+    url: "/code/ios"
+  - title: "算法"
+    url: "/code/algorithm"
+
+- title: 产品体验分析
+  url: "/product"
+  side: left
+
+- title: "阅读与感悟"
+  url: "/read"
+  side: left
+
+- title: "开发团队管理"
+  url: "/manager"
+  side: left
+
+- title: 开源实验室
+  url: "/osl"
+  side: left
+  dropdown:
+  - title: "Android框架解读"
+    url: "/osl/framework"
+  - title: "UI控件"
+    url: "/osl/ui"
+  - title: "开源APP"
+    url: "/osl/app"
+
+
+- title: "捐赠"
+  url: "/donate"
+  side: right
+
+- title: "这是我"
+  url: "/about"
+  side: right

@@ -1,0 +1,118 @@
+<!doctype html> <html class="no-js" lang="en"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>深入讲解WebView——上</title> <link rel="stylesheet" href="/assets/css/styles_feeling_responsive.css"> <script src="/assets/js/modernizr.min.js"></script> <noscript> <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7cVolkhov' rel='stylesheet' type='text/css'> </noscript> <meta name="description" content="作为Android开发者，我们都知道在手机中内置了一款高性能 webkit 内核浏览器,在 SDK 中封装为一个叫做 WebView 组件。今天就为大家讲讲Android中WebView的详细使用方法"/> <link rel="author" href="https://plus.google.com/u/0/110645272912875945931"/> <link rel="icon" sizes="32x32" href="/assets/img/favicon-32x32.png"> <link rel="icon" sizes="192x192" href="/assets/img/touch-icon-192x192.png"> <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/assets/img/apple-touch-icon-180x180-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/apple-touch-icon-152x152-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/apple-touch-icon-144x144-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/apple-touch-icon-120x120-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/apple-touch-icon-76x76-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/apple-touch-icon-72x72-precomposed.png"> <link rel="apple-touch-icon-precomposed" href="/assets/img/apple-touch-icon-precomposed.png"> <meta name="msapplication-TileImage" content="/assets/img/msapplication_tileimage.png"/> <meta name="msapplication-TileColor" content="#fabb00"> <!-- Facebook Optimization --> <meta property="og:locale" content="en_EN" /> <meta property="og:type" content="website" /> <meta property="og:title" content="深入讲解WebView——上" /> <meta property="og:description" content="无论何时，请保持学者的谦逊与宽容。"/> <meta property="og:url" content="//WebView1/" /> <meta property="og:site_name" content="kymjs张涛" /> <!-- Search Engine Optimization --> <link type="text/plain" rel="author" href="//humans.txt" /> </head> <body id="top-of-page" class="page-fullwidth"> <div id="navigation" class="sticky"> <nav class="top-bar" data-topbar> <ul class="title-area"> <li class="name"> <h1 class="show-for-small-only"><a href="" class="icon-tree"> kymjs张涛</a></h1> </li> <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> <li class="toggle-topbar menu-icon"><a href="#"><span>Navigation</span></a></li> </ul> <section class="top-bar-section"> <ul class="right"> <li class="divider"></li> <li><a href="/donate">捐赠</a></li> <li class="divider"></li> <li><a href="/about">这是我</a></li> </ul> <ul class="left"> <li class="has-dropdown"> <a href="/code">代码与技术</a> <ul class="dropdown"> <li><a href="/code/android">Android</a></li> <li><a href="/code/ios">IOS</a></li> <li><a href="/code/algorithm">算法</a></li> </ul> </li> <li class="divider"></li> <li><a href="/product">产品体验分析</a></li> <li class="divider"></li> <li><a href="/read">阅读与感悟</a></li> <li class="divider"></li> <li><a href="/manager">开发团队管理</a></li> <li class="divider"></li> <li class="has-dropdown"> <a href="/osl">开源实验室</a> <ul class="dropdown"> <li><a href="/osl/framework">Android框架解读</a></li> <li><a href="/osl/ui">UI控件</a></li> <li><a href="/osl/app">开源APP</a></li> </ul> </li> <li class="divider"></li> </ul> </section> </nav> </div><!-- /#navigation --> <div class="row t30"> <div class="medium-12 columns"> <article> <header> <p class="subheadline">代码与技术</p> <h1>深入讲解WebView——上</h1> </header> <p class="teaser"> 作为Android开发者，我们都知道在手机中内置了一款高性能 webkit 内核浏览器,在 SDK 中封装为一个叫做 WebView 组件。今天就为大家讲讲Android中WebView的详细使用方法 </p> <p>作为Android开发者，我们都知道在手机中内置了一款高性能 webkit 内核浏览器,在 SDK 中封装为一个叫做 WebView 组件。<br /> 在开发过程中应该注意几点:<br /> 1.这是最基本的 AndroidManifest.xml 中必须添加访问网络权限。<br /> 2.如果访问的页面中有 Javascript,则 WebView 必须设置支持 Javascript。<br /></p><pre><code>WebView.getSettings().setJavaScriptEnabled(true);
+</code></pre><p>3.如果页面中链接,如果希望点击链接继续在当前browser中响应,而不是新开Android的系统browser中响应该链接,必须覆盖 WebView的WebViewClient对象.<br /></p><pre><code>mWebView.setWebViewClient(new WebViewClient(){
+	public boolean shouldOverrideUrlLoading(WebView view, String url){ 
+		view.loadUrl(url);
+		return true;
+	}
+});
+</code></pre><p>4.如果不做任何处理 ,浏览网页,点击系统“Back”键,整个 Browser 会调用 finish()而结束自身,如果希望浏览的网页回退而不是推出浏览器,需要在当前Activity中处理并消费掉该 Back 事件.(代码有些精简)<br /></p><pre><code>public boolean onKeyDown(int keyCode, KeyEvent event) {
+	if ((keyCode == KEYCODE_BACK) &amp;&amp; mWebView.canGoBack()) { 
+		mWebView.goBack();
+		return true;
+	}
+	return super.onKeyDown(keyCode, event);
+}
+</code></pre><h2 id="js">与js互调</h2> <p>既然可以显示网页，那么当然也可以让网页操作本地方法。(由于一行写不下，缩进我调整了一下)<br /></p><pre><code>public class WebViewDemo extends Activity { 
+	private WebView mWebView;
+	private Handler mHandler = new Handler(); 
+	
+	public void onCreate(Bundle icicle) { 
+
+	setContentView(R.layout.WebViewdemo);
+	mWebView = (WebView) findViewById(R.id.WebView); 
+	WebSettings webSettings = mWebView.getSettings(); 
+	webSettings.setJavaScriptEnabled(true); 
+	mWebView.addJavascriptInterface(new Object() {
+	  public void clickOnAndroid() {
+		  mHandler.post(new Runnable() {
+			  public void run() { 
+				  mWebView.loadUrl("javascript:wave()");
+			  }
+		  });
+	  }
+	}, "demo"); 
+	mWebView.loadUrl("file:///android_asset/demo.html"); 
+	
+	}
+}
+</code></pre><p>我们看 addJavascriptInterface(Object obj,String interfaceName)这个方法 ,该方法将一个java对象绑定到一个javascript对象中,javascript对象名就是 interfaceName(demo),作用域是Global.这样初始化 WebView 后,在WebView加载的页面中就可以直接通过javascript:window.demo访问到绑定的java对象了. 来看看在html中是怎样调用的.</p><pre><code>&lt;html&gt;
+&lt;script language="javascript"&gt;
+  function wave() {
+    document.getElementById("droid").src="android_waving.png";
+  }
+&lt;/script&gt;
+&lt;body&gt;
+  &lt;a onClick="window.demo.clickOnAndroid()"&gt;
+  &lt;img id="droid" src="android_normal.png" mce_src="android_normal.png"/&gt;&lt;br&gt; Click me! &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>这样在 javascript 中就可以调用 java 对象的 clickOnAndroid()方法了,同样我们可以在此对象中定义很多方法(比如发短信,调用联系人列表等手机系统功能),这里 wave()方法是 java 中调用 javascript 的例子.<br /></p> <p>需要说明一点:addJavascriptInterface方法中要绑定的Java对象及方法要运行另外的线程中,不能运行在构造他的线程中,这也是使用 Handler 的目的.</p> <h2 id="webview">深入使用WebView</h2> <h3 id="jsandroid">让js调用Android代码</h3> <ol> <li>首先简述 WebView、WebViewClient、WebChromeClient 之间的区别:<br /> 在 WebView 的设计中,不是什么事都要 WebView类干的,有些杂事是分给其他人的,这样 WebView 专心干好 自己的解析、渲染工作就行了.WebViewClient 就是帮助 WebView 处理各种通知、请求事件等 ,WebChromeClient 是辅助 WebView 处理 Javascript 的对话框,网站图标,网站 title.<br /></li> <li>功能实现:<br /> 利用 android 中的 WebView 加载一个 html 网页,在 html 网页中定义一个按钮,点击按钮弹出一 个 toast.<br /></li> <li> <p>实现步骤:<br /> 首先定义一个接口类,将上下文对象传进去,在接口类中定义要在 js 中实现的方法。<br /> 接着在assets资源包下定义一个 html 文件,在文件中定义一个 button.button 的点击事件定义为一个 js 函数. <br /> 之后在 xml 中定义一个 WebView 组件,在活动类中获取 WebView 并对 WebView 参数进行设置,此处特别注意要设置 WebView 支持 js 且将定义的 js 接口类添加到 WebView 中去,此后在 js 中就可以利用该接口类中定义的 函数了.即:<br /></p> <p>myWebView.getSettings().setJavaScriptEnabled(true);</p> <p>myWebView.addJavascriptInterface(new JavaScriptinterface(this),”android”);</p> </li> </ol> <p>最后利用 WebView 加载本地 html 文件的方法是:<br /></p><pre><code>myWebView.loadData(htmlText,"text/html", "utf-8");
+</code></pre><p>此处的htmltext 是以字符串的方式读取 assets 报下 html中的内容.<br /> 4. 实现利用返回键返回到上一页:<br /> 设置 WebView 的按键监听,监听到期返回键并判断网页是否能够返回 ,利用 WebView 的 goBack()返回到上一页.<br /></p> <h3 id="webview-">WebView 缓存</h3> <p>在项目中如果使用到 WebView 控件,当加载 html 页面时,会在/data/data/包名目录下生成 database 与 cache 两个文件夹（我的手机没有root，就不截图了）。<br /> 请求的 url 记录是保存在 WebViewCache.db,而 url 的内容是保存在 WebViewCache 文件夹下. 大家可以自己动手试一下,定义一个html文件,在里面显示一张图片,用WebView加载出来,然后再试着从缓存里把这张图片读取出来并显示 .</p> <h3 id="webview--1">WebView 删除缓存</h3> <p>其实已经知道缓存保存的位置了，那么删除就很简单了，获取到这个缓存，然后删掉他就好了。<br /> //删除保存于手机上的缓存</p><pre><code>private int clearCacheFolder(File dir,long numDays) { 
+  int deletedFiles = 0;
+  if (dir!= null &amp;&amp; dir.isDirectory()){
+    try {
+      for (File child:dir.listFiles()){
+	      if (child.isDirectory()) {
+	        deletedFiles += clearCacheFolder(child, numDays);
+        }
+        if (child.lastModified() &lt; numDays) {
+          if (child.delete()) {
+           deletedFiles++; 
+          }
+        }
+      }
+    } catch(Exception e) {
+      e.printStackTrace(); 
+    }
+  }
+  return deletedFiles; 
+}
+</code></pre><p>是否启用缓存功能也是可以控制的</p> <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="sr">//</span><span class="err">优先使用缓存</span><span class="p">:</span> 
+	<span class="no">WebView</span><span class="o">.</span><span class="n">getSettings</span><span class="p">()</span><span class="o">.</span><span class="n">setCacheMode</span><span class="p">(</span><span class="no">WebSettings</span><span class="o">.</span><span class="n">LOAD_CACHE_ELSE_NETWORK</span><span class="p">);</span> 
+	<span class="sr">//</span><span class="err">不使用缓存</span><span class="p">:</span> 
+	<span class="no">WebView</span><span class="o">.</span><span class="n">getSettings</span><span class="p">()</span><span class="o">.</span><span class="n">setCacheMode</span><span class="p">(</span><span class="no">WebSettings</span><span class="o">.</span><span class="n">LOAD_NO_CACHE</span><span class="p">);</span></code></pre></div> <p>在退出应用的时候加上如下代码，可以完整的清空缓存</p> <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="n">CacheManager</span><span class="o">.</span><span class="na">getCacheFileBaseDir</span><span class="o">();</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">file</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">file</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">file</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="n">File</span> <span class="n">item</span> <span class="o">:</span> <span class="n">file</span><span class="o">.</span><span class="na">listFiles</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">item</span><span class="o">.</span><span class="na">delete</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="n">file</span><span class="o">.</span><span class="na">delete</span><span class="o">();</span>
+	<span class="o">}</span>
+	<span class="n">context</span><span class="o">.</span><span class="na">deleteDatabase</span><span class="o">(</span><span class="s">&quot;WebView.db&quot;</span><span class="o">);</span> 
+	<span class="n">context</span><span class="o">.</span><span class="na">deleteDatabase</span><span class="o">(</span><span class="s">&quot;WebViewCache.db&quot;</span><span class="o">);</span></code></pre></div> <h2 id="webview--404-">WebView 处理 404 错误</h2> <p>显示网页还会遇到一个问题，就是网页有可能会找不到，WebView当然也是可以处理的（代码如果全部贴出来实在太多了，这里就只贴重要部分了）</p> <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebView_404</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>	
+	<span class="kd">private</span> <span class="n">Handler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Handler</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">what</span><span class="o">==</span><span class="mi">404</span><span class="o">)</span> <span class="o">{</span><span class="c1">//主页不存在</span>
+        <span class="c1">//载入本地 assets 文件夹下面的错误提示页面 404.html </span>
+        <span class="n">web</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="s">&quot;file:///android_asset/404.html&quot;</span><span class="o">);</span>
+      <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+        <span class="n">web</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="n">HOMEPAGE</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+	<span class="o">};</span>
+	<span class="nd">@Override</span>
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+	  <span class="n">web</span><span class="o">.</span><span class="na">setWebViewClient</span><span class="o">(</span><span class="k">new</span> <span class="nf">WebViewClient</span><span class="o">()</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldOverrideUrl</span><span class="o">(</span><span class="n">WebView</span> <span class="n">view</span><span class="o">,</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span> 
+	    <span class="k">if</span><span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&quot;http://&quot;</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">getRespStatus</span><span class="o">(</span><span class="n">url</span><span class="o">)==</span><span class="mi">404</span><span class="o">)</span> <span class="o">{</span>
+	      <span class="n">view</span><span class="o">.</span><span class="na">stopLoading</span><span class="o">();</span>
+	      <span class="c1">//载入本地 assets 文件夹下面的错误提示页面 404.html </span>
+	      <span class="n">view</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="s">&quot;file:///android_asset/404.html&quot;</span><span class="o">);</span>
+	    <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+	      <span class="n">view</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+	    <span class="o">}</span>
+	      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+	    <span class="o">}</span>
+	  <span class="o">});</span>
+	  <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nf">Runnable</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+		  <span class="n">Message</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Message</span><span class="o">();</span>
+		  <span class="c1">//此处判断主页是否存在,因为主页是通过 loadUrl 加载的,</span>
+		  <span class="c1">//此时不会执行 shouldOverrideUrlLoading 进行页面是否存在的判断 //进入主页后,点主页里面的链接,链接到其他页面就一定会执行</span>
+		  <span class="n">shouldOverrideUrlLoading</span> <span class="n">方法了</span> 
+		  <span class="nf">if</span><span class="o">(</span><span class="n">getRespStatus</span><span class="o">(</span><span class="n">HOMEPAGE</span><span class="o">)==</span><span class="mi">404</span><span class="o">)</span> <span class="o">{</span>
+	      <span class="n">msg</span><span class="o">.</span><span class="na">what</span> <span class="o">=</span> <span class="mi">404</span><span class="o">;</span>
+		  <span class="o">}</span>
+		  <span class="n">handler</span><span class="o">.</span><span class="na">sendMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+	  <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></div> <h2 id="section">未完</h2> <p>由于WebView的用法实在太多了，这里就分为两部分，下一部分跟大家讲讲WebView滚动状态监听以及获取session与写cookie的方法~~</p> </article> </div><!-- /.medium-12.columns --> </div><!-- /.row --> <div id="up-to-top" class="row"> <div class="small-12 columns" style="text-align: right;"> <a class="iconfont" href="#top-of-page">&#xf108;</a> </div><!-- /.small-12.columns --> </div><!-- /.row --> <footer id="footer-content" class="bg-grau"> <div id="footer"> <div class="row"> <div class="medium-6 large-5 columns"> <h5 class="shadow-black">公众号：Android技术分享</h5> <p class="shadow-black"> <img src="/images/qrcode.jpg" alt="无论何时，请保持学者的谦逊与宽容。" width="120" height="120"/> </p> </div><!-- /.large-6.columns --> <div class="small-6 medium-3 large-3 large-offset-1 columns"> <h5 class="shadow-black">推荐站点</h5> <ul class="no-bullet shadow-black"> <li > <a href="" title=""></a> </li> <li class="services-contact" > <a href="/android_design" title="Android应用设计指南">Android应用设计指南</a> </li> <li class="services-contact" > <a href="/kjframe" title="KJFrame框架 API">KJFrameForAndroid API</a> </li> </ul> </div><!-- /.large-4.columns --> <div class="small-6 medium-3 large-3 columns"> <h5 class="shadow-black">推荐博客</h5> <ul class="no-bullet shadow-black"> <li > <a href="" title=""></a> </li> <li class="network-entypo" > <a href="http://www.xiequan.info/" target="_blank" title="谢权">Android达人-谢权</a> </li> <li class="services-newsletter" > <a href="http://www.vmatianyu.cn/" target="_blank" title="马天宇博客">bong智能：马天宇</a> </li> <li class="rss-link" > <a href="http://www.aplesson.com/" target="_blank" title="Android+PHP=APlesson">开源爱好者：谭东</a> </li> <li class="sitemap-link" > <a href="http://blog.csdn.net/bboyfeiyu" target="_blank" title="Mr.Simple">Mr.Simple博客</a> </li> </ul> </div><!-- /.large-3.columns --> </div><!-- /.row --> </div><!-- /#footer --> <div id="subfooter"> <nav class="row"> <section id="subfooter-left" class="b30 small-12 medium-6 columns"> <ul class="inline-list"> <li>站务联系 QQ:766136833 </li> </ul> </section> <section id="subfooter-right" class="small-12 medium-6 columns social-icons"> <ul class="inline-list"> <li><a href="http://twitter.com/kymjs123" target="_blank" class="icon-twitter" title="Twitter"></a></li> <li><a href="http://github.com/kymjs" target="_blank" class="icon-github" title="Code"></a></li> <li><a href="http://www.kymjs.com/" target="_blank" class="icon-xing" title="张涛"></a></li> </ul> </section> </nav> </div><!-- /#subfooter --> </footer> <script src="/assets/js/javascript.min.js"></script> </body> </html>

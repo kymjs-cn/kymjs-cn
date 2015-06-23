@@ -1,0 +1,118 @@
+<!doctype html> <html class="no-js" lang="en"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>一个来自Afinal断点下载BUG的解决方案</title> <link rel="stylesheet" href="/assets/css/styles_feeling_responsive.css"> <script src="/assets/js/modernizr.min.js"></script> <noscript> <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7cVolkhov' rel='stylesheet' type='text/css'> </noscript> <meta name="description" content=" 作为国内第一个Android开发框架Afinal，相信有很多开发者都知道的。虽然随着Android版本的迭代，其中有一些方法有了更好的解决办法但从来没有人怀疑Afinal的价值。"/> <link rel="author" href="https://plus.google.com/u/0/110645272912875945931"/> <link rel="icon" sizes="32x32" href="/assets/img/favicon-32x32.png"> <link rel="icon" sizes="192x192" href="/assets/img/touch-icon-192x192.png"> <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/assets/img/apple-touch-icon-180x180-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/apple-touch-icon-152x152-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/apple-touch-icon-144x144-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/apple-touch-icon-120x120-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/apple-touch-icon-76x76-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/apple-touch-icon-72x72-precomposed.png"> <link rel="apple-touch-icon-precomposed" href="/assets/img/apple-touch-icon-precomposed.png"> <meta name="msapplication-TileImage" content="/assets/img/msapplication_tileimage.png"/> <meta name="msapplication-TileColor" content="#fabb00"> <!-- Facebook Optimization --> <meta property="og:locale" content="en_EN" /> <meta property="og:type" content="website" /> <meta property="og:title" content="一个来自Afinal断点下载BUG的解决方案" /> <meta property="og:description" content="无论何时，请保持学者的谦逊与宽容。"/> <meta property="og:url" content="//afinal/" /> <meta property="og:site_name" content="kymjs张涛" /> <!-- Search Engine Optimization --> <link type="text/plain" rel="author" href="//humans.txt" /> </head> <body id="top-of-page" class="page-fullwidth"> <div id="navigation" class="sticky"> <nav class="top-bar" data-topbar> <ul class="title-area"> <li class="name"> <h1 class="show-for-small-only"><a href="" class="icon-tree"> kymjs张涛</a></h1> </li> <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> <li class="toggle-topbar menu-icon"><a href="#"><span>Navigation</span></a></li> </ul> <section class="top-bar-section"> <ul class="right"> <li class="divider"></li> <li><a href="/donate">捐赠</a></li> <li class="divider"></li> <li><a href="/about">这是我</a></li> </ul> <ul class="left"> <li class="has-dropdown"> <a href="/code">代码与技术</a> <ul class="dropdown"> <li><a href="/code/android">Android</a></li> <li><a href="/code/ios">IOS</a></li> <li><a href="/code/algorithm">算法</a></li> </ul> </li> <li class="divider"></li> <li><a href="/product">产品体验分析</a></li> <li class="divider"></li> <li><a href="/read">阅读与感悟</a></li> <li class="divider"></li> <li><a href="/manager">开发团队管理</a></li> <li class="divider"></li> <li class="has-dropdown"> <a href="/osl">开源实验室</a> <ul class="dropdown"> <li><a href="/osl/framework">Android框架解读</a></li> <li><a href="/osl/ui">UI控件</a></li> <li><a href="/osl/app">开源APP</a></li> </ul> </li> <li class="divider"></li> </ul> </section> </nav> </div><!-- /#navigation --> <div class="row t30"> <div class="medium-12 columns"> <article> <header> <p class="subheadline">代码与技术</p> <h1>一个来自Afinal断点下载BUG的解决方案</h1> </header> <p class="teaser"> 作为国内第一个Android开发框架Afinal，相信有很多开发者都知道的。虽然随着Android版本的迭代，其中有一些方法有了更好的解决办法但从来没有人怀疑Afinal的价值。 </p> <p style="margin-bottom: 15pt; line-height: 18.75px; white-space: normal; word-wrap: break-word; letter-spacing: 1px;"> <span style="line-height: 1.5; font-size: 12.5px;">&nbsp; &nbsp; 作为国内第一个Android开发框架Afinal，相信有很多开发者都知道的。虽然随着Android版本的迭代，其中有一些方法有了更好的解决办法但从来没有人怀疑Afinal的价值。</span> </p> <p style="margin-bottom: 15pt; line-height: 18.75px; white-space: normal; word-wrap: break-word; letter-spacing: 1px;"> <span style="line-height: 1.5; font-size: 12.5px;">&nbsp;&nbsp;&nbsp;&nbsp;最近在做一个断点下载的功能，参考了比较多的例子，无意间发现了FinalHttp.download()方法中的一个BUG。</span> </p> <p style="margin-bottom: 15pt; line-height: 18.75px; white-space: normal; word-wrap: break-word; letter-spacing: 1px;"> <span style="line-height: 1.5; font-size: 12.5px;">&nbsp;&nbsp;&nbsp;&nbsp;首先跟大家介绍一下afinal中download下载的实现原理。与其他众多下载方法不同，afinal使用的是一个单线程断点下载，且其中没有数据库或额外的文件操作。那么是如何实现断点续传的呢，主要是使用了FileOutputStream的一个构造方法<strong>，</strong>查看api文档看到</span><img src="/images/blog_image/20141214_1.png" alt="" /> </p> <p style="margin-bottom: 15pt; line-height: 18.75px; white-space: normal; word-wrap: break-word; letter-spacing: 1px;"> 参数append可以在一个文件的结尾处续写数据，这样就实现了断点续传功能。 </p> <p style="margin-bottom: 15pt; line-height: 18.75px; white-space: normal; word-wrap: break-word; letter-spacing: 1px;"> 知道了实现原理，我们来看代码（参数名略有改动）<a href="http://git.oschina.net/fuhai/afinal/blob/master/src/net/tsz/afinal/http/entityhandler/FileEntityHandler.java" target="_blank" rel="nofollow">你可以在这里看到完整的代码</a> </p><pre class="brush:java;toolbar: true; auto-links: false;">public Object handleEntity(HttpEntity entity, EntityCallBack callback,
+String target, boolean isResume) throws IOException {
+if (TextUtils.isEmpty(target) || target.trim().length() == 0)
+return null;
+File targetFile = new File(target);
+if (!targetFile.exists())
+targetFile.createNewFile();
+if (mStop) {
+return targetFile;
+}
+
+long current = 0;
+FileOutputStream os = null;
+if (isResume) {
+current = targetFile.length();
+os = new FileOutputStream(target, true);
+} else {
+os = new FileOutputStream(target);
+}
+if (mStop) {
+return targetFile;
+}
+
+InputStream input = entity.getContent();
+long count = entity.getContentLength() + current;
+if (current &gt;= count || mStop) {
+return targetFile;
+}
+int readLen = 0;
+byte[] buffer = new byte[1024];
+while (!mStop &amp;&amp; !(current &gt;= count)
+&amp;&amp; ((readLen = input.read(buffer, 0, 1024)) &gt; 0)) {// 未全部读取
+os.write(buffer, 0, readLen);
+current += readLen;
+callback.callBack(count, current, false);
+}
+callback.callBack(count, current, true);
+return targetFile;
+}</pre><p></p> <p> &nbsp;&nbsp;&nbsp;&nbsp;根据代码，我们可以看到一个明显的问题——流没有关闭。这个问题好改，自己发现了关闭就行我就不多解释了。还有一个问题，就是这一句 </p> <p> long count = entity.getContentLength() + current; </p> <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;远端文件的大小是被不断增大的，下载任务每被暂停一次，远端文件的大小就被增大一次，增加的大小等于本地已下载的碎片文件的大小。这么做的后果有两个：1、<span style="line-height: 22.5px;">这个断点下载功能完全没有使用，每次下载都是从0开始。2、本地文件由于是续传，越来越大。</span> </p> <p> <span style="line-height: 22.5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;举个例子，远端文件大小是1024 b，本地已经读取了512b的大小，而此时用户暂停下载。下次重新下载时，程序重新读取远端文件大小，变成了1024+512大小，而本地文件是512，input.read再次从0开始读取，而本地文件从512开始写，之后下载完成。两次下载共下载了512+1024个字节，本地文件由于是续传，第一次下载512碎片文件，而第二次又下载完整的1024文件，最后下载变成了1536个字节大小的文件。（顺便一说，这个文件是可以正常打开的，但是打开的速度会比源文件慢）</span> </p> <p> <span style="line-height: 22.5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;找到了问题，解决办法有了吗，单纯的将&nbsp;<span style="line-height: 22.5px;">count = entity.getContentLength() + current;改成<span style="line-height: 22.5px;">count = entity.getContentLength() ;然后while循环里面的current&lt;count去掉就行了？你可以尝试一下，这样是不行的。首先这样依旧不能达到断点续传的目的，只要在续传的时候</span></span></span> </p><pre class="brush:java;toolbar: true; auto-links: false;">InputStream input = entity.getContent();</pre><p></p> <p> <span style="line-height: 22.5px;"><span style="line-height: 22.5px;"><span style="line-height: 22.5px;"></span></span></span>这一句获取的流没有跳过已经下载的部分，就达不到节省流量续传下载的目的，我想这一点应该可以理解吧。 </p> <p> OK，那么InputStream有一个skip方法，跳过已下载的部分总可以吧，NO，也不行，因为负责续传写入文件的FileOutPutStream中有一部分数据是损坏的，不能被使用，而这时你跳过的字节数也就不是真正需要跳过的字节数了。 </p> <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;继续，看代码，这里是我的解决办法：<br /> </p><pre class="brush:java;toolbar: true; auto-links: false;">public File handleEntity(HttpEntity entity, DownloadProgress callback,
+File save, boolean isResume) throws IOException {
+long current = 0;
+RandomAccessFile file = new RandomAccessFile(save, &quot;rw&quot;);
+if (isResume) {
+current = file.length();
+}
+InputStream input = entity.getContent();
+long count = entity.getContentLength();
+if (mStop) {
+FileUtils.closeIO(file);
+return save;
+}
+
+current = input.skip(current);  
+file.seek(current); 
+
+int readLen = 0;
+byte[] buffer = new byte[1024];
+while ((readLen = input.read(buffer, 0, 1024)) != -1) {
+if (mStop) {
+break;
+} else {
+file.write(buffer, 0, readLen);
+current += readLen;
+callback.onProgress(count, current);
+}
+}
+callback.onProgress(count, current);
+
+if (mStop &amp;&amp; current &lt; count) { // 用户主动停止
+FileUtils.closeIO(file);
+throw new IOException(&quot;user stop download thread&quot;);
+}
+FileUtils.closeIO(file);
+return save;
+}</pre><p></p> <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以看到使用一个支持对随机访问文件的读取和写入的RandomAccessFile类来替换可以续传的FileOutPutStream，同时通过对current重新赋值 </p><pre class="brush:java;toolbar: true; auto-links: false;"> current = input.skip(current);</pre><p></p> <p> 完美解决了碎片文件中不可用部分造成的文件损坏问题。 </p> <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上方法其实还是有一个小问题，在Android中我们都知道，下载的时候一般都会伴随着一个进度条展示。这个小问题就是当暂停后继续下载的时候，由于暂停前那一段不可用的损坏的文件占用了大小，可能会在恢复下载的时候发生进度条大幅反弹的现象，这对用户体验是很糟糕的，毕竟谁想我辛辛苦苦等了半天的进度读条，又一下子退回去那么多。<br /> </p> <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么解决办法其实是给个心理安慰，看如下代码<br /> </p><pre class="brush:java;toolbar: true; auto-links: false;">public File handleEntity(HttpEntity entity, DownloadProgress callback,
+File save, boolean isResume) throws IOException {
+long current = 0;
+RandomAccessFile file = new RandomAccessFile(save, &quot;rw&quot;);
+if (isResume) {
+current = file.length();
+}
+InputStream input = entity.getContent();
+long count = entity.getContentLength() + current;
+if (mStop) {
+FileUtils.closeIO(file);
+return save;
+}
+// 在这里其实这样写是不对的，之所以如此是为了用户体验，谁都不想自己下载时进度条都走了一大半了，就因为一个暂停一下子少了一大串
+/**
+* 这里实际的写法应该是： &lt;br&gt;
+* current = input.skip(current); &lt;br&gt;
+* file.seek(current); &lt;br&gt;
+* 根据JDK文档中的解释：Inputstream.skip(long i)方法跳过i个字节，并返回实际跳过的字节数。&lt;br&gt;
+* 导致这种情况的原因很多，跳过 n 个字节之前已到达文件末尾只是其中一种可能。这里我猜测可能是碎片文件的损害造成的。
+*/
+file.seek(input.skip(current));
+
+int readLen = 0;
+byte[] buffer = new byte[1024];
+
+while ((readLen = input.read(buffer, 0, 1024)) != -1) {
+if (mStop) {
+break;
+} else {
+file.write(buffer, 0, readLen);
+current += readLen;
+callback.onProgress(count, current);
+}
+}
+callback.onProgress(count, current);
+
+if (mStop &amp;&amp; current &lt; count) { // 用户主动停止
+FileUtils.closeIO(file);
+throw new IOException(&quot;user stop download thread&quot;);
+}
+FileUtils.closeIO(file);
+return save;
+}</pre><p></p> <p> &nbsp;&nbsp;&nbsp;&nbsp;这里顺带提一下，android的下载我个人并不提倡使用多线程。主要是因为手机一般不会下载多么大的文件，而多线程本身的线程开销加上使用数据库或额外的记录文件产生的IO开销也不小，使用多线程的意义并不是很大。<br /> </p> </article> </div><!-- /.medium-12.columns --> </div><!-- /.row --> <div id="up-to-top" class="row"> <div class="small-12 columns" style="text-align: right;"> <a class="iconfont" href="#top-of-page">&#xf108;</a> </div><!-- /.small-12.columns --> </div><!-- /.row --> <footer id="footer-content" class="bg-grau"> <div id="footer"> <div class="row"> <div class="medium-6 large-5 columns"> <h5 class="shadow-black">公众号：Android技术分享</h5> <p class="shadow-black"> <img src="/images/qrcode.jpg" alt="无论何时，请保持学者的谦逊与宽容。" width="120" height="120"/> </p> </div><!-- /.large-6.columns --> <div class="small-6 medium-3 large-3 large-offset-1 columns"> <h5 class="shadow-black">推荐站点</h5> <ul class="no-bullet shadow-black"> <li > <a href="" title=""></a> </li> <li class="services-contact" > <a href="/android_design" title="Android应用设计指南">Android应用设计指南</a> </li> <li class="services-contact" > <a href="/kjframe" title="KJFrame框架 API">KJFrameForAndroid API</a> </li> </ul> </div><!-- /.large-4.columns --> <div class="small-6 medium-3 large-3 columns"> <h5 class="shadow-black">推荐博客</h5> <ul class="no-bullet shadow-black"> <li > <a href="" title=""></a> </li> <li class="network-entypo" > <a href="http://www.xiequan.info/" target="_blank" title="谢权">Android达人-谢权</a> </li> <li class="services-newsletter" > <a href="http://www.vmatianyu.cn/" target="_blank" title="马天宇博客">bong智能：马天宇</a> </li> <li class="rss-link" > <a href="http://www.aplesson.com/" target="_blank" title="Android+PHP=APlesson">开源爱好者：谭东</a> </li> <li class="sitemap-link" > <a href="http://blog.csdn.net/bboyfeiyu" target="_blank" title="Mr.Simple">Mr.Simple博客</a> </li> </ul> </div><!-- /.large-3.columns --> </div><!-- /.row --> </div><!-- /#footer --> <div id="subfooter"> <nav class="row"> <section id="subfooter-left" class="b30 small-12 medium-6 columns"> <ul class="inline-list"> <li>站务联系 QQ:766136833 </li> </ul> </section> <section id="subfooter-right" class="small-12 medium-6 columns social-icons"> <ul class="inline-list"> <li><a href="http://twitter.com/kymjs123" target="_blank" class="icon-twitter" title="Twitter"></a></li> <li><a href="http://github.com/kymjs" target="_blank" class="icon-github" title="Code"></a></li> <li><a href="http://www.kymjs.com/" target="_blank" class="icon-xing" title="张涛"></a></li> </ul> </section> </nav> </div><!-- /#subfooter --> </footer> <script src="/assets/js/javascript.min.js"></script> </body> </html>

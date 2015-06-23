@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 对话框</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+	#content div.wrong {
+		background: url('ico_wrong.png') left 3px no-repeat;
+		padding-left: 20px;
+	}
+	#content div.good {
+		background: url('ico_good.png') left 3px no-repeat;
+		padding-left: 20px;
+	}
+	#content .exampleItem {
+		margin: 0 0 20px 0;
+	}
+	#content .exampleItem table {
+		margin-top: 10px;
+		background: #282828;
+		border-collapse: separate;
+		border-spacing: 0;
+		border-radius: 2px 2px 2px 2px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+		color: #FFFFFF;
+		width: 100%;
+	}
+	#content .exampleItem table th, #content .exampleItem table td {
+		padding: 5px 10px;
+	}
+	#content .exampleItem table th {
+		text-align: left;
+	}
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>对话框&nbsp;<a class="originalLink" href="http://developer.android.com/design/building-blocks/dialogs.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="switches.html">上一页</a><a class="buttonNext" href="pickers.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<a class="noticeDev" href="http://developer.android.com/guide/topics/ui/dialogs.html" target="_blank">
+					<div>
+						<h3>开发者文档</h3>
+						<p>Dialogs</p>
+					</div>
+				</a>
+				<p>应用通过对话框让用户作出决定或者填写一些信息，以完成任务。对话框的形式可以是简单的 取消/确定 或者是复杂一点的比如调整设置或者输入文字。</p>
+				<img class="nomarginLR" src="dialogs_main.png" />
+				<ul>
+					<li>
+						<h4>1. 可选的标题区</h4>
+						<p>标题提示用户对话框的内容。例如用户正在调整的设置名称。</p>
+					</li>
+					<li>
+						<h4>2. 内容区</h4>
+						<p>对话框的内容多种多样。例如设置对话框，它使用了多种 UI 控件，包括各种按钮、滑块和文本框，通过它们来调整应用或者系统的设置。另外，对于警告对话框，它一般包含了用户所作出决定的进一步信息。</p>
+					</li>
+					<li>
+						<h4>3. 操作按钮</h4>
+						<p>操作按钮一般是取消/确定。确定一般是默认的操作。如果选项中包括了关闭等待等非确定操作，请在按钮上使用主动动词。一般的规则是将否定操作放在左边，确定操作放在右边。</p>
+					</li>
+				</ul>
+				<img class="nomarginLR" src="dialogs_examples.png" />
+				<p class="caption">Android 中几种典型的对话框用例。</p>
+				<div class="contentHeaderWraper">
+					<h2>警告对话框</h2>
+				</div>
+				<p>警告对话框用于在执行下一步操作前请求用户确认或者提示用户当前的状态。由于内容的不同，警告对话框的布局会有些不同。</p>
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="dialogs_w_no_title.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<h4>没有标题栏的警告对话框</h4>
+						<p>大多数警告对话框不需要标题栏。因为通常情况下很难通过一两句话说明白。内容区应当是一个问句 (例如“删除该会话？”) 或者是一个与操作明显相关的陈述句。</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="dialogs_w_title.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<h4>有标题栏的警告对话框</h4>
+						<p>谨慎的使用带有标题栏的警告对话框。仅在有可能引起数据丢失、连接断开、收费等高风险的操作时才使用。并且标题应当是一个明确的问题，内容区提供一些解释。</p>
+						<p>保持问题和解释简短明确: 例如“擦除 USB 存储设备？”不要使用道歉语句。用户应当能够不看内容，只通过标题和下面的操作按钮做出决定。</p>
+					</div>
+					<div class="clear"></div>
+					<div class="exampleItem">
+						<div>
+							<div class="column col4">
+								<div class="wrong">不要这样做</div>
+								<table>
+									<tr><td>Are you sure?</td></tr>
+								</table>
+							</div>
+							<div class="column col4">
+								<div class="wrong">不要这样做</div>
+								<table>
+									<tr><td>Warning!</td></tr>
+								</table>
+							</div>
+							<div class="column col5 nomarginRight">
+								<div class="good">应当这么做</div>
+								<table>
+									<tr><td>Erase USB storage?</td></tr>
+								</table>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div>
+							<div class="column col4">
+								<table>
+									<tr><td>你确定么？</td></tr>
+								</table>
+							</div>
+							<div class="column col4">
+								<table>
+									<tr><td>警告！</td></tr>
+								</table>
+							</div>
+							<div class="column col5 nomarginRight">
+								<table>
+									<tr><td>擦除 USB 存储设备？</td></tr>
+								</table>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+				<div class="contentHeaderWraper">
+					<h2>弹出对话框</h2>
+				</div>
+				<p>弹出对话框是一种轻量级的对话框，一般只让用户做出一个选择。弹出对话框不使用确定或取消按钮，而是让用户通过简单的触摸，在整个工作流中做出选择。</p>
+				<img class="nomarginRight" src="dialogs_popups_example.png" />
+				<div class="contentHeaderWraper">
+					<h2>Toasts</h2>
+				</div>
+				<div>
+					<div class="column col6">
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>Toast 提供了轻量级的反馈信息。例如，当你在发送邮件前跳出撰写页面，“草稿已保存”的 Toast 让用户知道待会儿可以继续编辑。Toast 会在一定时间后自动消失。</p>
+						<a class="noticeDev noticeDevLeft" href="http://developer.android.com/guide/topics/ui/notifiers/toasts.html" target="_blank">
+							<div>
+								<h3>开发者文档</h3>
+								<p>Toasts</p>
+							</div>
+						</a>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="dialogs_toasts.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div><!-- mainContent -->
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="switches.html">上一页</a><a class="buttonNext" href="pickers.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 滑动视图</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+	#content .videoInstruction {
+		padding-left: 20px;
+		background: url('ico_movie_inline.png') left center no-repeat;
+	}
+	#content .galaxynexusFrame, #content .galaxynexusFrame video {
+		height: 384px;
+		width: 216px;
+	}
+	#content .galaxynexusFrame {
+		background: transparent url("device_nexus5_blank_port_span5.png") top left no-repeat;
+		overflow: hidden;
+		padding: 52px 33px 69px 31px;
+	}
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>滑动视图&nbsp;<a class="originalLink" href="http://developer.android.com/design/patterns/swipe-views.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="multi-pane-layouts.html">上一页</a><a class="buttonNext" href="fullscreen.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<a class="noticeDev" href="http://developer.android.com/training/implementing-navigation/lateral.html" target="_blank">
+					<div>
+						<h3>开发者文档</h3>
+						<p>Creating Swipe Views with Tabs</p>
+					</div>
+				</a>
+				<p>快捷的导航是良好设计的应用的基础。一般情况下，应用的逻辑层次设计是垂直的。横向导航可以扁平化应用的逻辑层次，并且使得导航更加容易。滑动视图使得用户可以通过简单的手势在条目的详细信息间切换，使得读取信息更加顺畅。</p>
+				<div class="clear"></div>
+				<div class="contentHeaderWraper">
+					<h2>详细信息视图的滑动切换</h2>
+				</div>
+				<p>应用的常见结构是列表/详细信息模式: 用户先在一个列表中浏览条目，例如图片，表格或者邮件，之后选择一个项目，在另一个屏幕中查看详细内容。</p>
+				<img class="nomarginLR" src="swipe_views.png" />
+				<p class="caption">列表 (左边) 和详细信息 (右边) 视图。</p>
+				<p>在手机上，由于列表和详细信息处在不同的屏幕中，一般情况下，用户要查看另一个条目时，需要首先回到列表，再进入另一条目的详细信息，这种模式又称为“pogo-sticking”。</p>
+				<p>当用户想连续查看详细信息时，使用滑动手势在上一页/下一页视图间切换，以避免“pogo-sticking”模式。</p>
+				<img class="nomarginRight" src="swipe_views2.png" />
+				<p class="caption">通过滑动手势，在 Email 应用中连续浏览不同邮件。如果邮件内容超出了视图范围，用户滑动手势应当先被理解为浏览内容的其他部分，当内容已经达到边界时，继续滑动则会显示下一封邮件。如果直接作出从侧边滑入的手势，则应当理解为切换至下一封邮件。</p>
+				<img class="nomarginRight" src="swipe_views3.png" />
+				<p class="caption">通过滑动手势，在 Email 应用中连续浏览邮件超出视图的部分，而不是先切换到下一封邮件。</p>
+				<div class="contentHeaderWraper">
+					<h2>标签的滑动切换</h2>
+				</div>
+				<div>
+					<div class="column col5">
+						<div class="galaxynexusFrame">
+							<video class="clickPlay" autoplay>
+								<source src="http://developer.android.com/design/media/swipe_tabs.mp4" type="video/mp4">
+								<source src="http://developer.android.com/design/media/swipe_tabs.webm" type="video/webm">
+								<source src="http://developer.android.com/design/media/swipe_tabs.ogv" type="video/ogg">
+							</video>
+						</div>
+						<p class="caption">在通讯录应用中使用滑动手势切换不同的顶级屏幕。</p>
+						<p class="videoInstruction">点击重放视频。</p>
+					</div>
+					<div class="column col8 nomarginRight">
+						<p>如果你的应用使用了操作栏标签，那么应当可以通过滑动切换标签。</p>
+						<p>&nbsp;</p>
+						<div class="contentHeaderWraper">
+							<h2>检查清单</h2>
+						</div>
+						<ul class="circleList">
+							<li>
+								<p>使用滑动手势在详细信息视图或者标签之间切换。</p>
+							</li>
+							<li>
+								<p>过渡效果伴随着用户手势。不要等用户手势执行完才切换视图。</p>
+							</li>
+							<li>
+								<p>如果你之前使用后退/前进按钮切换视图，现在请使用滑动手势吧。</p>
+							</li>
+							<li>
+								<p>考虑在详细信息视图中添加一些指示，告诉用户当前的条目处于整个列表的什么位置。</p>
+							</li>
+							<li>
+								<p>阅读开发者文档 <a href="http://developer.android.com/training/implementing-navigation/lateral.html#horizontal-paging" target="_blank">Implementing Lateral Navigation</a> 一节，进一步了解如何设计滑动视图。</p>
+							</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div><!-- mainContent -->
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="multi-pane-layouts.html">上一页</a><a class="buttonNext" href="fullscreen.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+---
+layout: page-fullwidth
+title: "全部博客"
+breadcrumb: true
+header:
+   image_fullwidth: header_unsplash_8.jpg
+---
+<div id="blog-index" class="row">
+	<div class="small-12 columns t30">
+		<dl class="accordion" data-accordion>
+			{% assign counter = 1 %}
+			{% for post in site.posts limit:1000 %}
+				<dd class="accordion-navigation">
+				<a href="#panel{{ counter }}">
+					{% if post.code %}
+					<font color="#AE57A4">{{ post.subheadline }}</font>
+					{% elsif post.manager %}
+					<font color="#0066CC">{{ post.subheadline }}</font>
+					{% elsif post.product %}
+					<font color="#FF8000">{{ post.subheadline }}</font>
+					{% elsif post.read %}
+					<font color="#BB3D00">{{ post.subheadline }}</font>
+					{% elsif post.osl %}
+					<font color="#22ac38">{{ post.subheadline }}</font>
+					{% endif %}
+					·<strong>{{ post.title }}</strong>
+				</a>
+					<div id="panel{{ counter }}" class="content">
+						{% if post.meta_description %}
+							{{ post.meta_description | strip_html | escape }}
+						{% elsif post.teaser %}
+							{{ post.teaser | strip_html | escape }}
+						{% endif %}
+						<a href="{{ site.url }}{{ post.url }}" title="Read {{ post.title escape_once }}"><strong>
+							{{ site.data.language.read_more }}
+						</strong>
+						</a>
+						<br><br>
+					</div>
+				</dd>
+			{% assign counter=counter | plus:1 %}
+			{% endfor %}
+		</dl>
+	</div><!-- /.small-12.columns -->
+</div><!-- /.row -->

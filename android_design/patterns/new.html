@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - Android 新特性</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>Android 新特性&nbsp;<a class="originalLink" href="http://developer.android.com/design/patterns/new.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="index.html">上一页</a><a class="buttonNext" href="gestures.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<p>让我们简略了解一下新版 Android 引入了哪些设计模式...</p>
+				<div class="contentHeaderWraper">
+					<h2>Android 4.4 KitKat</h2>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>自我标识</h4>
+						<p>Android 系统有一贯的设计风格，不过你也可以根据品牌形象的需要，对样式进行自定义。</p>
+						<p>使用你的标识色替换 Android UI 框架默认风格的蓝色，就可以统一的对按钮、进度条、滑块、标签和滚动提示等进行自定义。</p>
+						<p>在操作栏展示应用的图标和名称，使得用户始终能看到它们。</p>
+						<p>推荐阅读 <a href="../style/branding.html">自我标识</a> 一节，了解如何在应用中突出你的品牌形象，并将其融入 Android 应用的视觉元素之中。</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="branding_googlemusic.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<h4>触摸反馈</h4>
+				<p>Android KitKat 之前的版本中，默认触摸反馈是一种充满活力的蓝色。而且所有的触摸反馈都有明显的色彩对比，所以有可能和你的标识色相冲突。</p>
+				<p>Android KitKat 开始，触摸反馈变得比较微妙，触摸仅仅带来控件背景色的微小变化。这样做有两个好处: (1) 符合 <a href="../get-started/principles.html">设计原则 - 给予鼓励</a> 的原则；(2) 更加容易突出你品牌的形象，不会与系统的设计风格混淆。阅读 <a href="../style/touch-feedback.html">触摸反馈</a> 一节，了解更多细节。</p>
+				<img class="nomarginLR" src="touch_feedback_reaction_response.png" />
+				<h4>全屏模式</h4>
+				<p>Android KitKat 增强了应用的全屏模式，可以满足你的不同需求。阅读 <a href="../patterns/fullscreen.html">全屏模式</a> 一节，了解更多细节。</p>
+				<img class="nomarginLR" src="fullscreen_landing.png" />
+				<h4>手势</h4>
+				<div>
+					<div class="column col7">
+						<p>新的 <a href="../patterns/gestures.html">手势</a> 一节介绍了 Android KitKat 的新手势: <strong>双击</strong>和<strong>双击拖动</strong>。这两个手势用于调整视图内容的大小。</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="gesture_doubletouch.png" />
+						<img class="nomarginLR" src="gesture_doubletouchdrag.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="contentHeaderWraper">
+					<h2>Android 4.1 果冻豆 Jelly Bean</h2>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>通知抽屉</h4>
+						<p>Android 4.1 中，通知抽屉有一些明显的改进:</p>
+						<ul class="circleList">
+							<li>
+								<p>用户可以在通知抽屉中立刻做出操作</p>
+							</li>
+							<li>
+								<p>通知可以有更灵活的大小和布局</p>
+							</li>
+							<li>
+								<p>通过优先级标志让通知按照重要程度排序</p>
+							</li>
+							<li>
+								<p>可以折叠和展开通知</p>
+							</li>
+						</ul>
+						<p>通知抽屉基本布局没有改变，所以为 Jelly Bean 之前的版本设计的应用的通知仍然看起来是一样的。阅读更新过的 <a href="notifications.html">通知</a> 一节，了解更多通知抽屉的改变。</p>
+						<p>&nbsp;</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="new_notifications.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>可调整大小的窗口小部件</h4>
+						<p>窗口小部件作为自定义主屏幕的重要功能，使用户可以在主屏幕中“一眼”就看到应用中的重要信息。Android 4.1 带来了改进的应用小部件，它可以根据一些信息自动调整大小，并载入不同的内容:</p>
+						<ul class="circleList">
+							<li>
+								<p>用户将窗口小部件放在主屏幕的什么位置</p>
+							</li>
+							<li>
+								<p>用户为窗口小部件选择的大小</p>
+							</li>
+							<li>
+								<p>主屏幕上的可用空间</p>
+							</li>
+						</ul>
+						<p>你可以为横向和纵向的屏幕方向提供不同的小部件模式，系统会自动根据屏幕方向的变化来调用。 <a href="widgets.html">窗口小部件</a> 一节提供了更详细的信息，包括小部件的类型、限制和设计指导。</p>
+						<p>&nbsp;</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="new_widgets.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col11">
+						<h4>无障碍性</h4>
+						<p>Android 的一大使命就是整理全世界的信息，并使其可以被所有人访问。我们的使命不会因为用户有所残疾而改变，无论是视觉障碍、色盲、听力损失或者其他不便。</p>
+						<p>新的 <a href="accessibility.html">无障碍性</a> 一节提供了关于如何使你的应用符合无障碍性的指导:</p>
+						<ul class="circleList">
+							<li>
+								<p>使导航更加直观</p>
+							</li>
+							<li>
+								<p>使用推荐的触控元素大小</p>
+							</li>
+							<li>
+								<p>使视觉 UI 元素的文字标签更有意义</p>
+							</li>
+							<li>
+								<p>超时的情况发生时，提供其他选择的提示</p>
+							</li>
+							<li>
+								<p>使用标准的框架控件或者使用支持 Talkback 的自定义控件</p>
+							</li>
+							<li>
+								<p>自己尝试一下</p>
+							</li>
+						</ul>
+						<p>&nbsp;</p>
+					</div>
+					<div class="column col2 nomarginRight">
+						<img class="nomarginLR" src="new_accessibility.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="contentHeaderWraper">
+					<h2>冰淇淋三明治 Ice Cream Sandwich - Android 4.0</h2>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>导航栏</h4>
+						<p>Android 4.0 移除了手机上的硬件按键的要求，取而代之的是虚拟的导航栏，放置有返回、主屏幕和最近的应用这三个按钮。阅读 <a href="compatibility.html">兼容性</a> 一节，了解系统是如何在兼容之前的硬件按键以及如何让 Android 3.0 之前的应用兼容新的虚拟导航栏。</p>
+						<p>&nbsp;</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="whats_new_nav_bar.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>操作栏</h4>
+						<p>操作栏对于 Android 应用来说是最重要的元素。它为平台提供了统一的导航，并且可以展示应用中的操作。</p>
+						<p>&nbsp;</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="whats_new_action_bar.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>多视图布局</h4>
+						<p>在 Android 的世界，为不同的屏幕尺寸和比例设计你的应用是很重要的。多视图布局可以将在小型设备上需要多个视图才能完成的操作组合在同一个界面中，展示在更大屏幕的平板上。</p>
+						<p>&nbsp;</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="whats_new_multipanel.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col7">
+						<h4>选择</h4>
+						<p>之前，长按手势用于调出上下文操作菜单，现在则只用于选择。一旦选择了数据，上下文操作栏就会显示可用的操作。</p>
+					</div>
+					<div class="column col6 nomarginRight">
+						<img class="nomarginLR" src="whats_new_multiselect.png" />
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="index.html">上一页</a><a class="buttonNext" href="gestures.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

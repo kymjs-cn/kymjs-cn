@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 手势</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+	#content li.iconAction {
+		background: url('ico_action.png') left top no-repeat;
+		padding-left: 40px;
+	}
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>手势&nbsp;<a class="originalLink" href="http://developer.android.com/design/patterns/gestures.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="new.html">上一页</a><a class="buttonNext" href="app-structure.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<p>手势使得用户可以操作你的应用中的对象。下面的表格展示了 Android 支持的主要手势。</p>
+				<div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_touch.png" />
+						<h4>触摸</h4>
+						<p>触发项目的默认操作。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								按下，抬起。</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_longtouch.png" />
+						<h4>长按</h4>
+						<p>进入选择模式。使用户可以选择视图中的单个或者多个项目，并选择上下文操作栏的功能。取代了长按唤出上下文菜单的功能。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								按住，等待，抬起</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column col4 nomarginRight">
+						<img class="nomarginLR" src="gesture_swipe.png" />
+						<h4>滑动</h4>
+						<p>滚动内容或者在同一层级的不同视图间切换。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								按住，移动，抬起</p>
+							</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_drag.png" />
+						<h4>拖动</h4>
+						<p>重新排列视图中的数据或者将数据移动到容器 (例如主屏幕上的目录) 中。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								长按，移动，抬起</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_doubletouch.png" />
+						<h4>双击</h4>
+						<p>放大内容。在文字选择中作为辅助手势。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								快速连续两次触摸</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_doubletouchdrag.png" />
+						<h4>双击拖动</h4>
+						<p>放大或者缩小点击区域的内容。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								点击松开后立刻再次按住屏幕上下拖动:</p>
+								<ul class="circleList">
+									<li>向上滑动放大区域内容</li>
+									<li>向下滑动缩小区域内容</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_pinchopen.png" />
+						<h4>放大 (Pinch open)</h4>
+						<p>放大内容。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								用两个手指按住，向相互远离的方向移动，抬起</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column col4">
+						<img class="nomarginLR" src="gesture_pinchclose.png" />
+						<h4>缩小 (Pinch close)</h4>
+						<p>缩小内容。</p>
+						<ul>
+							<li class="iconAction">
+								<p><span class="highlight">操作</span><br />
+								用两个手指按住，向相互接近的方向移动，抬起</p>
+							</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="new.html">上一页</a><a class="buttonNext" href="app-structure.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

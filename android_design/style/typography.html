@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 字体</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>字体&nbsp;<a class="originalLink" href="http://developer.android.com/design/style/typography.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="metrics-grids.html">上一页</a><a class="buttonNext" href="color.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="typography_main.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<p><a href="http://developer.android.com/downloads/design/roboto-1.2.zip">下载 Roboto 字体</a></p>
+						<p>Android 的设计语言继承了许多传统排版设计概念，例如比例、留白、韵律和网格对齐。这些概念的成功运用，使得用户能够快速理解屏幕上的信息。为了更好的支持这一设计语言，Android 4.0 Ice Cream Sandwich 引入了全新的 <a href="http://www.google.com/fonts/specimen/Roboto" target="_blank">Roboto</a> 字体家族，它专为界面渲染和高分辨率屏幕而设计。</p>
+						<p>当前的 <a href="http://developer.android.com/reference/android/widget/TextView.html" target="_blank">TextView</a> 控件默认支持极细、细、普通、粗等不同的字重，每种字重都有对应的斜体。另有 <a href="http://www.google.com/fonts/specimen/Roboto+Condensed" target="_blank">Roboto Condensed</a> 这一变体可供选择，同样的，它也具有不同的字重和对应的斜体。</p>
+						<img class="nomarginLR" src="typography_variants@2x.png" width="220" />
+						<p><a target="_blank" href="http://developer.android.com/downloads/design/Roboto_Specimen_Book_20131031.pdf">下载 Specimen Book</a></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="contentHeaderWraper">
+					<h2>&nbsp;</h2>
+				</div>
+				<div>
+					<div class="column col6">
+						<h4>默认字体颜色</h4>
+						<p>Android 界面使用以下的色彩样式: <code>textColorPrimary</code> 和 <code>textColorSecondary</code>。在浅色主题中则使用 <code>textColorPrimaryInverse</code> 和 <code>textColorSecondaryInverse</code>。在设计框架中还包括了几种自带的触摸反馈效果。</p>
+						<img class="nomarginRight" src="typography_defaults.png" />
+					</div>
+					<div class="column col6 nomarginRight">
+						<h4>字体的缩放</h4>
+						<p>为不同控件引入字体大小上的反差有助于营造有序、易懂的排版效果。但在同一个界面中使用过多不同的字体大小则会造成混乱。Android 设计框架使用以下有限的几种字体大小:</p>
+						<img class="nomarginRight" src="typography_sizes.png" />
+						<p>用户可以在“设置”中调整整个系统的字体大小。为了支持这些辅助特性，字体的像素应当设计成与大小无关的，称之为 (<acronym title="Scale-independent pixels. One sp is one pixel on a 160 dpi screen if the user's global text scale is set to 100%.">sp</acronym>)。排版的时候也应当考虑到这些设置。</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="metrics-grids.html">上一页</a><a class="buttonNext" href="color.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

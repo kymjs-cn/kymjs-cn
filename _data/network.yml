@@ -1,0 +1,21 @@
+- menu_name: "推荐博客"
+
+- name: "Android达人-谢权"
+  url: "http://www.xiequan.info/"
+  class: "network-entypo"
+  title: "谢权"
+
+- name: "bong智能：马天宇"
+  url: "http://www.vmatianyu.cn/"
+  class: "services-newsletter"
+  title: "马天宇博客"
+
+- name: "开源爱好者：谭东"
+  url: "http://www.aplesson.com/"
+  class: "rss-link"
+  title: "Android+PHP=APlesson"
+
+- name: "Mr.Simple博客"
+  url: "http://blog.csdn.net/bboyfeiyu"
+  class: "sitemap-link"
+  title: "Mr.Simple"

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 滚动容器</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+	#content .videoInstruction {
+		padding-left: 20px;
+		background: url('ico_movie_inline.png') left center no-repeat;
+	}
+	#content .framedGalaxynexusLand,#content .framedGalaxynexusLand video {
+		height: 300px;
+		width: 533px;
+	}
+	#content .framedGalaxynexusLand {
+		background: transparent url("device_nexus5_blank_land_span13.png") no-repeat left top;
+		overflow: hidden;
+		padding: 36px 119px 54px 108px;
+	}
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>滚动容器&nbsp;<a class="originalLink" href="http://developer.android.com/design/building-blocks/scrolling.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="grid-lists.html">上一页</a><a class="buttonNext" href="spinners.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<p>滚动容器可以通过滑动手势浏览更多的内容。滚动的速度取决于手势的速度。</p>
+				<div class="contentHeaderWraper">
+					<h2>滚动提示</h2>
+				</div>
+				<p>滚动时显示滚动提示，表明当前内容在全部内容中的位置。</p>
+				<div class="framedGalaxynexusLand">
+					<video class="clickPlay" autoplay>
+						<source src="http://developer.android.com/design/media/scroll_indicator.mp4" type="video/mp4">
+						<source src="http://developer.android.com/design/media/scroll_indicator.webm" type="video/webm">
+						<source src="http://developer.android.com/design/media/scroll_indicator.ogv" type="video/ogg">
+					</video>
+				</div>
+				<p class="videoInstruction">点击重放视频。</p>
+				<div class="contentHeaderWraper">
+					<h2>滚动索引</h2>
+				</div>
+				<p>除了一般的滚动，按照字母排序的长列表还可以提供滚动索引:&nbsp;可以快速的按照首字母查找条目。如果有滚动索引，即使不滚动，仍然会显示滚动提示。触摸或者拖动它时，将会提示当前位置的首字母。</p>
+				<div class="framedGalaxynexusLand">
+					<video class="clickPlay" autoplay>
+						<source src="http://developer.android.com/design/media/scroll_index.mp4" type="video/mp4">
+						<source src="http://developer.android.com/design/media/scroll_index.webm" type="video/webm">
+						<source src="http://developer.android.com/design/media/scroll_index.ogv" type="video/ogg">
+					</video>
+				</div>
+				<p class="videoInstruction">点击重放视频。</p>
+			</div><!-- mainContent -->
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="grid-lists.html">上一页</a><a class="buttonNext" href="spinners.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

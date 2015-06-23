@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 颜色</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+	#content .paletteList {
+		width: 740px;
+	}
+	#content .largePalette {
+		height: 80px;
+	}
+	#content .smallPalette {
+		height: 40px;
+	}
+	#content .paletteList li {
+		float: left;
+		width: 148px;
+		margin: 0;
+		text-align: center;
+		position: relative;
+	}
+	#content .largePalette li {
+		height: 80px;
+	}
+	#content .smallPalette li {
+		height: 40px;
+	}
+	#content .paletteList li div {
+		background-color: white;
+		width: 80px;
+		padding: 10px;
+		position: absolute;
+		left: 24px;
+		top: -25px;
+		
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+	}
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+	$(function () {
+		var largetPalette = $("#content .paletteList li");
+		var count = largetPalette.length;
+		for (var i = 0; i < count; ++i) {
+			palette = $(largetPalette[i]);
+			var div = palette.find("div");
+			div.hide();
+
+			palette.hover(function () {
+				var obj = $(this);
+				obj.find("div").show();
+			}, function () {
+				var obj = $(this);
+				obj.find("div").hide();
+			});
+		}
+	});
+	//]]>
+	</script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>颜色&nbsp;<a class="originalLink" href="http://developer.android.com/design/style/color.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="typography.html">上一页</a><a class="buttonNext" href="iconography.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<p>使用不同颜色是为了强调信息。选择合适你设计的颜色，并且提供不错的视觉对比效果。注意红色和绿色对于色弱的人士可能无法分辨。</p>
+				<ul class="paletteList largePalette">
+					<li style="background-color:#33B5E5"><div style="color:#33B5E5">#33B5E5</div></li>
+					<li style="background-color:#AA66CC"><div style="color:#AA66CC">#AA66CC</div></li>
+					<li style="background-color:#99CC00"><div style="color:#99CC00">#99CC00</div></li>
+					<li style="background-color:#FFBB33"><div style="color:#FFBB33">#FFBB33</div></li>
+					<li style="background-color:#FF4444"><div style="color:#FF4444">#FF4444</div></li>
+				</ul>
+				<ul class="paletteList smallPalette">
+					<li style="background-color:#0099CC"><div style="color:#0099CC">#0099CC</div></li>
+					<li style="background-color:#9933CC"><div style="color:#9933CC">#9933CC</div></li>
+					<li style="background-color:#669900"><div style="color:#669900">#669900</div></li>
+					<li style="background-color:#FF8800"><div style="color:#FF8800">#FF8800</div></li>
+					<li style="background-color:#CC0000"><div style="color:#CC0000">#CC0000</div></li>
+				</ul>
+				<div class="contentHeaderWraper">
+					<h2>调色板</h2>
+				</div>
+				<p>蓝色是 Android 调色板中的标准颜色。每一种颜色都有相应的深色版本以供使用。</p>
+				<p><a href="https://dl-ssl.google.com/android/design/Android_Design_Color_Swatches_20120229.zip">下载调色板</a></p>
+				<img class="nomarginLR" src="color_spectrum.png" />
+			</div>
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="typography.html">上一页</a><a class="buttonNext" href="iconography.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

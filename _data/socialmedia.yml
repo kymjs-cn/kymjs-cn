@@ -1,0 +1,14 @@
+- name: Twitter
+  url: http://twitter.com/kymjs123
+  class: icon-twitter
+  title: "Twitter"
+
+- name: GitHub
+  url: http://github.com/kymjs
+  class: icon-github
+  title: Code
+
+- name: 张涛
+  url: http://www.kymjs.com/
+  class: icon-xing
+  title: 张涛

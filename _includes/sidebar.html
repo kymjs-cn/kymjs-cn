@@ -1,0 +1,33 @@
+<aside>
+	{% if page.showlogo %}
+		<img class="b30" src="/image/logo_s.jpg" alt="">
+	{% endif %}
+	
+	<div class="panel radius">
+		{% if page.sidebar-option.title %}
+			<h3>{{ page.sidebar-option.title }}</h3>
+		{% else %}
+			<h3>张涛</h3>
+		{% endif %}
+		<p>
+			{% if page.sidebar-option.content %}
+				{{ page.sidebar-option.content }}
+			{% else %}
+				hello
+			{% endif %}
+		</p>
+	</div>
+
+	<div class="border-dotted radius b30">
+		<img src="/image/alipay_qrcode.jpg">
+		<p class="text-left">
+			支付宝捐赠
+		</p>
+	</div>
+	<div class="border-dotted radius b30">
+		<img src="/image/wechat_qrcode.png">
+		<p class="text-left">
+			微信支付捐赠
+		</p>
+	</div>
+</aside>

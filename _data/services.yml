@@ -1,0 +1,11 @@
+- menu_name: "推荐站点"
+
+- name: "Android应用设计指南"
+  url: "/android_design"
+  class: "services-contact"
+  title: "Android应用设计指南"
+
+- name: "KJFrameForAndroid API"
+  url: "/kjframe"
+  class: "services-contact"
+  title: "KJFrame框架 API"

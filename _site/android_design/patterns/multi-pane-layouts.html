@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Android Design - 多视图布局</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/folding.css" />
+	<style type="text/css">
+
+	</style>
+	<script type="text/javascript" src="../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.common.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.folding.min.js"></script>
+	<script type="text/javascript" src="../js/adchs.js"></script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<div id="header">
+			<a href="../index.html">Android Design&nbsp;<span class="headerChs">Android 设计指南非官方简体中文版</span></a>
+		</div>
+		<div id="navWrapper">
+		</div>
+		<div id="content">
+			<div class="contentNav topNav">
+				<div class="contentHeaderWraper">
+					<h2>多视图布局&nbsp;<a class="originalLink" href="http://developer.android.com/design/patterns/multi-pane-layouts.html" target="_blank">Original Version</a></h2>
+				</div>
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="navigation-drawer.html">上一页</a><a class="buttonNext" href="swipe-views.html">下一页</a>
+				</div>
+			</div>
+			<div id="mainContent">
+				<a class="noticeDev" href="http://developer.android.com/training/basics/fragments/index.html" target="_blank">
+					<div>
+						<h3>开发者文档</h3>
+						<p>Building a Dynamic UI with Fragments</p>
+					</div>
+				</a>
+				<p>为 Android 开发应用时，要注意有各种屏幕尺寸的设备能够运行 Android 系统。确保你的应用在各种设备上始终能够提供平衡且美观的布局。</p>
+				<p>通过“面板”可以帮助你做到这一点。当屏幕上有很多横向空间时，多个“面板”可以组合成一个复合视图，而在小屏幕上，则可以将它们分割成多个视图。</p>
+				<div class="contentHeaderWraper">
+					<h2>将多个面板组合在同一屏幕中</h2>
+				</div>
+				<p>在小型设备上，应用的内容可以被分为一个主要的列表和详细信息视图。触摸列表中的项目，将切换到对应的详细信息。</p>
+				<img class="nomarginLR" src="multipane_views.png" />
+				<p>由于平板比手机拥有更大的屏幕，你可以通过“面板”将项目列表和详细信息放在一个单独的复合视图中。这样可以更加充分的利用屏幕空间，并且使应用中的导航更加容易。</p>
+				<img class="nomarginLR" src="multipane_view_tablet.png" />
+				<p>一般情况下，在屏幕左边显示列表，右边显示列表中被选中项目的详细信息。保持左边列表中被选中的状态，使得面板间的关系更加明确。</p>
+				<div class="contentHeaderWraper">
+					<h2>复合视图以及屏幕方向</h2>
+				</div>
+				<p>无论屏幕是竖着还是横着的，视图中的功能应该是一样的。如果你使用了复合视图，那么在旋转屏幕的时候，仍然保持复合视图，不要分割成多个视图。有很多方法可以确保屏幕旋转的情况下，功能保持不变。</p>
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="multipane_stretch.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<h4>拉伸/压缩</h4>
+						<p>调整左边列表的宽度，使得布局在不同方向上都保持平衡且合理。</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="multipane_stack.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<h4>堆放</h4>
+						<p>重新排列面板的堆放方式，适应不同的屏幕方向。</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="multipane_expand.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<h4>展开/折叠</h4>
+						<p>当屏幕旋转的时候，可以将左边的列表的一部分折叠起来，只显示重要的信息。并且提供一个“展开”的控件，使用户可以将左边的列表重新调整成原来的宽度。</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="column col8">
+						<img class="nomarginLR" src="multipane_show.png" />
+					</div>
+					<div class="column col5 nomarginRight">
+						<h4>显示/隐藏</h4>
+						<p>旋转屏幕后，让右边的面板占满整个屏幕。通过操作栏中的“向上”按钮隐藏/显示左边的列表。</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="contentHeaderWraper">
+					<h2>检查清单</h2>
+				</div>
+				<ul class="circleList">
+					<li>
+						<p>预先为不同的屏幕尺寸和方向设计好应用的布局。</p>
+					</li>
+					<li>
+						<p>仔细考虑在不同的屏幕方向时，何种复合视图的布局是应用最好的选择。</p>
+					</li>
+					<li>
+						<p>寻找各种可能，将应用的视图组合成复合视图。</p>
+					</li>
+					<li>
+						<p>确保在屏幕旋转后，仍然提供相同的功能。</p>
+					</li>
+				</ul>
+			</div><!-- mainContent -->
+			<div class="contentNav bottomNav">
+				<div class="buttonWrapper">
+					<a class="buttonPrev" href="navigation-drawer.html">上一页</a><a class="buttonNext" href="swipe-views.html">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

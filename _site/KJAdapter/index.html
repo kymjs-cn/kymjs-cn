@@ -1,0 +1,160 @@
+<!doctype html> <html class="no-js" lang="en"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>通用Adapter与ListView滚动时不加载图片的封装</title> <link rel="stylesheet" href="/assets/css/styles_feeling_responsive.css"> <script src="/assets/js/modernizr.min.js"></script> <noscript> <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic%7cVolkhov' rel='stylesheet' type='text/css'> </noscript> <meta name="description" content="介绍一个通用的Adapter实现，和对ListView滚动时不加载图片的封装。"/> <link rel="author" href="https://plus.google.com/u/0/110645272912875945931"/> <link rel="icon" sizes="32x32" href="/assets/img/favicon-32x32.png"> <link rel="icon" sizes="192x192" href="/assets/img/touch-icon-192x192.png"> <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/assets/img/apple-touch-icon-180x180-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/apple-touch-icon-152x152-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/apple-touch-icon-144x144-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/apple-touch-icon-120x120-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/apple-touch-icon-76x76-precomposed.png"> <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/apple-touch-icon-72x72-precomposed.png"> <link rel="apple-touch-icon-precomposed" href="/assets/img/apple-touch-icon-precomposed.png"> <meta name="msapplication-TileImage" content="/assets/img/msapplication_tileimage.png"/> <meta name="msapplication-TileColor" content="#fabb00"> <!-- Facebook Optimization --> <meta property="og:locale" content="en_EN" /> <meta property="og:type" content="website" /> <meta property="og:title" content="通用Adapter与ListView滚动时不加载图片的封装" /> <meta property="og:description" content="无论何时，请保持学者的谦逊与宽容。"/> <meta property="og:url" content="//KJAdapter/" /> <meta property="og:site_name" content="kymjs张涛" /> <!-- Search Engine Optimization --> <link type="text/plain" rel="author" href="//humans.txt" /> </head> <body id="top-of-page" class="page-fullwidth"> <div id="navigation" class="sticky"> <nav class="top-bar" data-topbar> <ul class="title-area"> <li class="name"> <h1 class="show-for-small-only"><a href="" class="icon-tree"> kymjs张涛</a></h1> </li> <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> <li class="toggle-topbar menu-icon"><a href="#"><span>Navigation</span></a></li> </ul> <section class="top-bar-section"> <ul class="right"> <li class="divider"></li> <li><a href="/donate">捐赠</a></li> <li class="divider"></li> <li><a href="/about">这是我</a></li> </ul> <ul class="left"> <li class="has-dropdown"> <a href="/code">代码与技术</a> <ul class="dropdown"> <li><a href="/code/android">Android</a></li> <li><a href="/code/ios">IOS</a></li> <li><a href="/code/algorithm">算法</a></li> </ul> </li> <li class="divider"></li> <li><a href="/product">产品体验分析</a></li> <li class="divider"></li> <li><a href="/read">阅读与感悟</a></li> <li class="divider"></li> <li><a href="/manager">开发团队管理</a></li> <li class="divider"></li> <li class="has-dropdown"> <a href="/osl">开源实验室</a> <ul class="dropdown"> <li><a href="/osl/framework">Android框架解读</a></li> <li><a href="/osl/ui">UI控件</a></li> <li><a href="/osl/app">开源APP</a></li> </ul> </li> <li class="divider"></li> </ul> </section> </nav> </div><!-- /#navigation --> <div class="row t30"> <div class="medium-12 columns"> <article> <header> <p class="subheadline">代码与技术</p> <h1>通用Adapter与ListView滚动时不加载图片的封装</h1> </header> <p class="teaser"> 介绍一个通用的Adapter实现，和对ListView滚动时不加载图片的封装。 </p> <p>在Android开发中写Adapter是一件非常麻烦的事情，枯燥重复，却又不得不去做。 对于Adapter一般都继承BaseAdapter复写几个方法，getView里面使用ViewHolder存储，其实大部分的代码都是类似的。那么本文就带大家一起做一次将Adapter封装成一个通用的Adapter。<br /> 关于本文的完整Demo，可以参考KJFrameForAndroid开发框架2.2版本中封装的实例，<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/KJAdapter.java">KJAdapter</a>和<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/AdapterHolder.java">AdapterHolder</a>这两个类。<br /> 那么接下来我们进入正文，下面这个类似的代码应该是我们看的最多的：</p><pre><code>public class EmojiGridAdapter extends BaseAdapter {
+
+    private List&lt;Emojicon&gt; datas;
+    private final Context cxt;
+
+    public EmojiGridAdapter(Context cxt, List&lt;Emojicon&gt; datas) {
+        this.cxt = cxt;
+        if (datas == null) {
+            datas = new ArrayList&lt;Emojicon&gt;(0);
+        }
+        this.datas = datas;
+    }
+
+    public void refresh(List&lt;Emojicon&gt; datas) {
+        if (datas == null) {
+            datas = new ArrayList&lt;Emojicon&gt;(0);
+        }
+        this.datas = datas;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return datas.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    private static class ViewHolder {
+        ImageView image;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            ......
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.image.setImageResource(datas.get(position).getResId());
+        return convertView;
+    }
+}
+</code></pre><h3 id="section">初步抽取</h3> <p>其中BaseAdapter的四个方法必须写，但是基本上前三个都是一模一样的， 所以可以使用泛型，写一个基类出来，把数据封装到基类里面，只需要构造方法传入就行了</p><pre><code>public class KJBaseAdapter&lt;T&gt; extends BaseAdapter {
+	List&lt;T&gt; datas;
+ 
+	KJBaseAdapter(Context cxt,List&lt;T&gt; datas){
+		......
+	}
+
+	@Override
+    public int getCount() {
+        return datas.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+}
+</code></pre><p>然后是我们唯一需要动脑的getView()方法，首先是判断converView是否空，然后载入item布局，然后ViewHolder挨个初始化控件，然后通过tag保存holder，最后设置View的显示。<br /> 步棸都知道了，那么我们慢慢来观察：ViewHolder一定是包含了item子控件的一个静态类。那么我们就干脆把item所有的子控件都放到ViewHolder里面，但是既然我们要通用，item肯定不是固定的，这就没办法把ViewHolder写的像上面的那种属性的形式。<br /> 这里我们使用一个键值对来存储Map&lt;id, view&gt;全部的控件，这样就可以在需要的时候直接通过id来找到对应的子View了。</p><pre><code>mViews = new Map&lt;Integaer, View&gt;();
+
+/**
+ * 通过控件的Id获取对于的控件，如果没有则加入views
+ * 
+ * @param viewId
+ * @return
+ */
+public &lt;T extends View&gt; T getView(int viewId) {
+    View view = mViews.get(viewId);
+    if (view == null) {
+        view = mConvertView.findViewById(viewId);
+        mViews.put(viewId, view);
+    }
+    return (T) view;
+}
+</code></pre><h3 id="viewholder">封装ViewHolder</h3> <p>只看getView，其他方法都一样；首先调用ViewHolder的get方法，如果convertView为null，new一个ViewHolder实例，通过使用mInflater.<br />inflate加载布局，然后new一个HashMap用于存储View，最后setTag(this)； 如果存在那么直接getTag最后通过getView(id)获取控件，如果存在则直接返回，否则调用findViewById，返回存储，返回。<br /><br /></p> <p>那么最后封装好的ViewHolder就是这样的<br /></p><pre><code>public class AdapterHolder {
+    private final Map&lt;Integer,View&gt; mViews;
+    private final int mPosition;
+    private final View mConvertView;
+
+    private AdapterHolder(ViewGroup parent, int layoutId, int position) {
+        this.mPosition = position;
+        this.mViews = new HashMap&lt;Integer, View&gt;();
+        mConvertView = LayoutInflater.from(parent.getContext()).inflate(
+                layoutId, parent, false);
+        // setTag
+        mConvertView.setTag(this);
+    }
+
+    /**
+     * 拿到一个ViewHolder对象
+     */
+    public static AdapterHolder get(View convertView, ViewGroup parent,
+            int layoutId, int position) {
+        if (convertView == null) {
+            return new AdapterHolder(parent, layoutId, position);
+        } else {
+            return (AdapterHolder) convertView.getTag();
+        }
+    }
+
+    /**
+     * 通过控件的Id获取对于的控件，如果没有则加入views
+     * 
+     * @param viewId
+     * @return
+     */
+    public &lt;T extends View&gt; T getView(int viewId) {
+        View view = mViews.get(viewId);
+        if (view == null) {
+            view = mConvertView.findViewById(viewId);
+            mViews.put(viewId, view);
+        }
+        return (T) view;
+    }
+}
+</code></pre><p>结合前面的基类，我们的Adapter就变成了这样的</p><pre><code>public class EmojiGridAdapter&lt;T&gt; extends KJBaseAdapter&lt;T&gt; {  
+  
+    @Override  
+    public View getView(int position, View convertView, ViewGroup parent){  
+        ViewHolder viewHolder = ViewHolder.get(mContext, convertView, parent,  
+                R.layout.item_single_str, position);  
+        TextView mTitle = viewHolder.getView(R.id.id_tv_title);  
+        mTitle.setText((String) mDatas.get(position));  
+        return viewHolder.getConvertView();  
+    }  
+}  
+</code></pre><h3 id="section-1">最终的封装</h3> <p>再仔细观察，第一行的ViewHolder.get()和最后一行的return方法肯定也是不变的，果断进一步封装。<br /> 那么就完全可以是只需要抽出getView中可变的部分————通过ViewHolder把View找到，通过Item设置值；这一块单独写出来了。那么我们写一个方法就叫convert()来做这件事。至此代码简化到这样，剩下的已经不需要单独写一个Adapter了，直接Activity匿名内部类足够了。</p><pre><code>protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    setContentView(R.layout.activity_main);  
+    mListView = (ListView) findViewById(R.id.id_lv_main);  
+  
+    //设置适配器  
+    mListView.setAdapter(mAdapter = new CommonAdapter&lt;String&gt;(  
+            getApplicationContext(), mDatas, R.layout.item_single_str) {  
+        @Override  
+        public void convert(ViewHolder c, String item) {  
+            TextView view = viewHolder.getView(R.id.id_tv_title);  
+            view.setText(item);  
+        }  
+    });  
+}  
+</code></pre><h3 id="section-2">最后的总结</h3> <p>现在我们再来对比<a href="http://github.com/kymjs/KJFrameForAndroid">KJFrameForAndroid</a>中的封装，可以看到使用了SparseArray<view>来替代我们的Map，SparseArray实际上就是一个拥有两个数组的类，第一个数组是一个int[]，用来当做key，第二个就是泛型这里使用的是View[]，它是google推荐用来替代int作为key的Map集合的一个类。<br /></view></p> <p>还有一个细节就是KJFrameForAndroid中的封装，加入了一个absListView属性，并设置了滚动监听，这样就可以很方便的在基类中实现例如listview滚动过程中不加载图片等功能。</p> <p>最后我们封装好以后的代码：就可以直接查看<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/KJAdapter.java">KJAdapter</a>和<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/AdapterHolder.java">AdapterHolder</a>这两个类。 以及使用方法可以参考KJBlog中的使用，例如：<a href="https://github.com/KJFrame/KJBlog/blob/master/KJBlog/src/org/kymjs/blog/adapter/BlogAuthorAdapter.java">这里</a></p> </article> </div><!-- /.medium-12.columns --> </div><!-- /.row --> <div id="up-to-top" class="row"> <div class="small-12 columns" style="text-align: right;"> <a class="iconfont" href="#top-of-page">&#xf108;</a> </div><!-- /.small-12.columns --> </div><!-- /.row --> <footer id="footer-content" class="bg-grau"> <div id="footer"> <div class="row"> <div class="medium-6 large-5 columns"> <h5 class="shadow-black">公众号：Android技术分享</h5> <p class="shadow-black"> <img src="/images/qrcode.jpg" alt="无论何时，请保持学者的谦逊与宽容。" width="120" height="120"/> </p> </div><!-- /.large-6.columns --> <div class="small-6 medium-3 large-3 large-offset-1 columns"> <h5 class="shadow-black">推荐站点</h5> <ul class="no-bullet shadow-black"> <li > <a href="" title=""></a> </li> <li class="services-contact" > <a href="/android_design" title="Android应用设计指南">Android应用设计指南</a> </li> <li class="services-contact" > <a href="/kjframe" title="KJFrame框架 API">KJFrameForAndroid API</a> </li> </ul> </div><!-- /.large-4.columns --> <div class="small-6 medium-3 large-3 columns"> <h5 class="shadow-black">推荐博客</h5> <ul class="no-bullet shadow-black"> <li > <a href="" title=""></a> </li> <li class="network-entypo" > <a href="http://www.xiequan.info/" target="_blank" title="谢权">Android达人-谢权</a> </li> <li class="services-newsletter" > <a href="http://www.vmatianyu.cn/" target="_blank" title="马天宇博客">bong智能：马天宇</a> </li> <li class="rss-link" > <a href="http://www.aplesson.com/" target="_blank" title="Android+PHP=APlesson">开源爱好者：谭东</a> </li> <li class="sitemap-link" > <a href="http://blog.csdn.net/bboyfeiyu" target="_blank" title="Mr.Simple">Mr.Simple博客</a> </li> </ul> </div><!-- /.large-3.columns --> </div><!-- /.row --> </div><!-- /#footer --> <div id="subfooter"> <nav class="row"> <section id="subfooter-left" class="b30 small-12 medium-6 columns"> <ul class="inline-list"> <li>站务联系 QQ:766136833 </li> </ul> </section> <section id="subfooter-right" class="small-12 medium-6 columns social-icons"> <ul class="inline-list"> <li><a href="http://twitter.com/kymjs123" target="_blank" class="icon-twitter" title="Twitter"></a></li> <li><a href="http://github.com/kymjs" target="_blank" class="icon-github" title="Code"></a></li> <li><a href="http://www.kymjs.com/" target="_blank" class="icon-xing" title="张涛"></a></li> </ul> </section> </nav> </div><!-- /#subfooter --> </footer> <script src="/assets/js/javascript.min.js"></script> </body> </html>
